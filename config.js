@@ -13,4 +13,26 @@ module.exports = {
 
   // Default pot size for /splitsteal if no amount is given
   defaultPotAmount: 50,
+
+  moderation: {
+    // Channel names (lowercase, no #) where links are allowed.
+    // Everywhere else, links get deleted.
+    linkAllowedChannels: ['self-promo', 'booster-promo', 'media'],
+
+    // Role names that bypass all moderation (in addition to anyone with
+    // the "Manage Messages" permission, who is always exempt).
+    bypassRoleNames: ['Mod', 'Admin', 'Moderator'],
+
+    // How many warnings (swearing OR links, combined) before a timeout kicks in.
+    warnThreshold: 3,
+
+    // How long the escalation timeout lasts once someone hits the threshold.
+    warnTimeoutMinutes: 10,
+
+    // Warnings older than this many hours are forgiven (counter resets).
+    warnResetHours: 24,
+
+    // Optional: channel name to log deletions/warnings/timeouts to. Set to null to disable.
+    logChannelName: 'mod-log',
+  },
 };
