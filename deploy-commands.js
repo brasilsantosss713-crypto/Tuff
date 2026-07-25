@@ -1,5 +1,4 @@
-require('dotenv').config();
-const { REST, Routes, SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 const commands = [
   new SlashCommandBuilder()
@@ -29,19 +28,19 @@ const commands = [
     .setDescription('Start a Yes/No vote. Anyone who votes No gets timed out. (Mod use recommended)')
     .addStringOption(opt =>
       opt.setName('question').setDescription('The question to vote on').setRequired(true)),
+
+  new SlashCommandBuilder()
+    .setName('warnings')
+    .setDescription('Check a user\'s current moderation warning count.')
+    .addUserOption(opt =>
+      opt.setName('user').setDescription('Whose warnings to check').setRequired(false)),
+
+  new SlashCommandBuilder()
+    .setName('clearwarnings')
+    .setDescription('Clear a user\'s moderation warnings. (Mod only)')
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
+    .addUserOption(opt =>
+      opt.setName('user').setDescription('Whose warnings to clear').setRequired(true)),
 ].map(cmd => cmd.toJSON());
 
-const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
-
-(async () => {
-  try {
-    console.log('Registering slash commands...');
-    await rest.put(
-      Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
-      { body: commands }
-    );
-    console.log('Slash commands registered successfully.');
-  } catch (err) {
-    console.error(err);
-  }
-})();
+module.exports = { commands };
