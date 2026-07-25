@@ -36,7 +36,6 @@ async function runRace(interaction) {
     const racerList = Array.from(racers.values());
     const finishOrder = [];
 
-    // Simulate the race in a few animated ticks
     for (let tick = 0; tick < 8; tick++) {
       racerList.forEach(r => {
         if (r.progress < TRACK_LENGTH) {
@@ -67,7 +66,6 @@ async function runRace(interaction) {
       await new Promise(res => setTimeout(res, 1200));
     }
 
-    // Anyone who didn't cross the line, add in current order
     racerList.forEach(r => { if (!finishOrder.includes(r)) finishOrder.push(r); });
 
     const podium = finishOrder
