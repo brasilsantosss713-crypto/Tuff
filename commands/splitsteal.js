@@ -56,6 +56,7 @@ async function runSplitSteal(interaction) {
       return;
     }
 
+    // Accepted — move to choice phase
     const choiceRow = new ActionRowBuilder().addComponents(
       new ButtonBuilder().setCustomId('ss_choose').setLabel('🎮 Make Your Choice').setStyle(ButtonStyle.Primary),
     );
