@@ -9,6 +9,7 @@
     "deploy": "node deploy-commands.js"
   },
   "dependencies": {
+    "bad-words": "^4.0.0",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5"
   }
